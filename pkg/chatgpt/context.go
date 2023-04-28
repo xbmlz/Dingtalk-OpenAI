@@ -170,6 +170,10 @@ func (c *ChatGPT) ChatWithContext(question string) (answer string, err error) {
 			Model: model,
 			Messages: []openai.ChatCompletionMessage{
 				{
+					Role:    "system",
+					Content: "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.",
+				},
+				{
 					Role:    "user",
 					Content: prompt,
 				},
