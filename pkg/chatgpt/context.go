@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/gob"
-	"github.com/pandodao/tokenizer-go"
 	"image/png"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/pandodao/tokenizer-go"
 
 	"github.com/eryajf/chatgpt-dingtalk/public"
 	openai "github.com/sashabaranov/go-openai"
@@ -174,7 +175,7 @@ func (c *ChatGPT) ChatWithContext(question string) (answer string, err error) {
 				},
 			},
 			MaxTokens:   c.maxAnswerLen,
-			Temperature: 0.6,
+			Temperature: 1,
 			User:        c.userId,
 		}
 		resp, err := c.client.CreateChatCompletion(c.ctx, req)
@@ -197,7 +198,7 @@ func (c *ChatGPT) ChatWithContext(question string) (answer string, err error) {
 			Model:       model,
 			MaxTokens:   c.maxAnswerLen,
 			Prompt:      prompt,
-			Temperature: 0.6,
+			Temperature: 1,
 			User:        c.userId,
 			Stop:        []string{c.ChatContext.aiRole.Name + ":", c.ChatContext.humanRole.Name + ":"},
 		}
